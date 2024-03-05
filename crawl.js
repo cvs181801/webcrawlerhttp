@@ -1,4 +1,9 @@
-
+function getUrlsFromHtml(htmlBody, baseUrl){
+    const urls = [];
+    return urls;
+}
+//baseUrl here is the url of the site we are crawling
+//htmlBody will be a string representing the html on the site
 
 function normalizeUrl(urlString){
     const urlObj = new URL(urlString)
@@ -10,5 +15,6 @@ function normalizeUrl(urlString){
 }
 
 module.exports = {
-    normalizeUrl
+    normalizeUrl,
+    getUrlsFromHtml
 }
