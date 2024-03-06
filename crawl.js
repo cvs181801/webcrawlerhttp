@@ -1,5 +1,9 @@
-function getUrlsFromHtml(htmlBody, baseUrl){
+const { JSDOM } = require('jsdom');
+
+function getUrlsFromHtml(htmlBody, baseUrl){ 
     const urls = [];
+    const dom = new JSDOM(htmlBody);
+    const linkElements = dom.window.document.querySelectorAll('a');
     return urls;
 }
 //baseUrl here is the url of the site we are crawling
