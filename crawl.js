@@ -18,8 +18,22 @@ function getUrlsFromHtml(htmlBody, baseUrl){
 
 async function crawlPage(currentURL) {
     console.log(`Actively crawling ${currentURL}...`);
-    const resp = await fetch(currentURL);
-    console.log('response text: ', await resp.text());
+    try {
+        const resp = await fetch(currentURL);
+        if (resp.status > 399) {
+            console.log(`error fetching this website : ${currentURL}. Status code is ${resp.status}.`);
+            return;
+        }
+        console.log('response text: ', await resp.text());
+        const contentType = resp.headers.get("content-type");
+        if (contentType !== "text/html"){
+            console.log(`Error fetching this website : ${currentURL}. The content type is ${contentType}, but we were expecting HTML.`);
+            return; 
+        }
+    } catch (err) {
+        console.log(`I'm sorry, we are having trouble crawling ${currentURL}. Please try again. Error code: ${err.message}`)
+    }
+    
 }
 
 function normalizeUrl(urlString){
