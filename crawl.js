@@ -4,6 +4,13 @@ function getUrlsFromHtml(htmlBody, baseUrl){
     const urls = [];
     const dom = new JSDOM(htmlBody);
     const linkElements = dom.window.document.querySelectorAll('a');
+    for (const linkElement of linkElements){
+        if(linkElement.href.slice(0,1)==='/'){
+            urls.push(`${baseUrl}${linkElement.href}`)
+        } else {
+            urls.push(`${linkElement.href}`)
+        }
+    }
     return urls;
 }
 //baseUrl here is the url of the site we are crawling
