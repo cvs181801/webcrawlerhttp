@@ -16,6 +16,12 @@ function getUrlsFromHtml(htmlBody, baseUrl){
 //baseUrl here is the url of the site we are crawling
 //htmlBody will be a string representing the html on the site
 
+async function crawlPage(currentURL) {
+    console.log(`Actively crawling ${currentURL}...`);
+    const resp = await fetch(currentURL);
+    console.log('response text: ', await resp.text());
+}
+
 function normalizeUrl(urlString){
     const urlObj = new URL(urlString)
     const hostPath = `${urlObj.hostname}${urlObj.pathname}`;
@@ -27,5 +33,6 @@ function normalizeUrl(urlString){
 
 module.exports = {
     normalizeUrl,
-    getUrlsFromHtml
+    getUrlsFromHtml,
+    crawlPage
 }
